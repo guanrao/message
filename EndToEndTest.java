@@ -46,11 +46,13 @@ public class EndToEndTest {
 //    @Ignore
     @Test public void showAnErrorAndDoNotSendIfTheEmailAddressIsInvalid_story2() {
         Main.main("noatsign", "Hi there!");
+//        Main.main("noat@sign", "Hi there!");
         networkShouldReceive(NO_OUTPUT);
         consoleShouldReceive("Invalid email address: noatsign\n");
     }
 
-    @Ignore @Test public void showAnErrorAndDoNotSendIfTheBodyIsInvalid_story3() {
+//    @Ignore
+    @Test public void showAnErrorAndDoNotSendIfTheBodyIsInvalid_story3() {
         Main.main("dinah@example.com", "");
         networkShouldReceive(NO_OUTPUT);
         consoleShouldReceive("Cannot send an email with no body.\n");
