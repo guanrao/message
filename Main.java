@@ -57,6 +57,7 @@ public class Main {
                 return;
             }
 
+            //handle differently for email and chat
             if(args[0].equals("-im")){
                 sb.append("connect chat\n");
                 for(int i = 0; i < emails.length; i++) {
