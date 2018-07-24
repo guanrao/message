@@ -23,6 +23,11 @@ public class Main {
                 console.write(sb.toString());
                 return;
             }
+            if(args.length < 2 || args[1].isEmpty()){
+                sb.append("Cannot send an email with no body.\n");
+                console.write(sb.toString());
+                return;
+            }
             sb.append("connect smtp\nTo: ").append(args[0]).append("\n\n").append(args[1]).append("\n\n").append("disconnect\n");
 
             network.write(sb.toString());
