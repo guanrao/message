@@ -17,20 +17,26 @@ public class Main {
     public static void main(String... args) {
         StringBuilder sb = new StringBuilder();
         try{
-//            if(!validEmail(args[0])){
-//                //Invalid email address: jowithnoatsign
-//                sb.append("Invalid email address: ").append(args[0]).append("\n");
-//                console.write(sb.toString());
-//                return;
-//            }
+
             if(args.length < 2 || args[1].isEmpty()){
                 sb.append("Cannot send an email with no body.\n");
                 console.write(sb.toString());
                 return;
             }
+
+            String[] emails;
+            String msg;
+            if(args[0].equals("-im")){
+                emails = args[1].split(",");
+                msg = args[2];
+
+            }else{
+                emails = args[0].split(",");
+                msg = args[1];
+            }
+
             //for story 4, the example given does not quite agree with the description, i.e., comma-separated one arguments vs. space-separated several arguments
             //here we stick with comma-separated.
-            String[] emails = args[0].split(",");
 
             StringBuilder sbInvalidEmail = new StringBuilder();
             for(int i = 0; i < emails.length; i++){
@@ -51,18 +57,27 @@ public class Main {
                 return;
             }
 
-            sb.append("connect smtp\n");
-            for(int i = 0; i < emails.length; i++){
-                sb.append("To: ").append(emails[i]).append("\n");
-            }
-            sb.append("\n").append(args[1]).append("\n\n").append("disconnect\n");
+            if(args[0].equals("-im")){
+                sb.append("connect chat\n");
+                for(int i = 0; i < emails.length; i++) {
+                    sb.append('<').append(emails[i]).append('>').append('(').append(msg).append(')').append("\n");
+                }
+                sb.append("disconnect\n");
+            }else {
+                sb.append("connect smtp\n");
+                for (int i = 0; i < emails.length; i++) {
+                    sb.append("To: ").append(emails[i]).append("\n");
+                }
+                sb.append("\n").append(args[1]).append("\n\n").append("disconnect\n");
 
+            }
             network.write(sb.toString());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
 
     }
+
 
     public static boolean validEmail(String email){
         if(email == null || email.length() < 3 || !email.contains("@")){
