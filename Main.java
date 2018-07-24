@@ -18,8 +18,13 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         try{
 
-            if(args.length < 2 || args[1].isEmpty()){
+            if(args.length < 2 || args.length == 2 && args[1].isEmpty()){
                 sb.append("Cannot send an email with no body.\n");
+                console.write(sb.toString());
+                return;
+            }
+            if(args.length == 3 && args[2].isEmpty()){
+                sb.append("Cannot send a chat with no message.\n");
                 console.write(sb.toString());
                 return;
             }
