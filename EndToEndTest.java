@@ -43,7 +43,8 @@ public class EndToEndTest {
         consoleShouldReceive(NO_OUTPUT);
     }
 
-    @Ignore @Test public void showAnErrorAndDoNotSendIfTheEmailAddressIsInvalid_story2() {
+//    @Ignore
+    @Test public void showAnErrorAndDoNotSendIfTheEmailAddressIsInvalid_story2() {
         Main.main("noatsign", "Hi there!");
         networkShouldReceive(NO_OUTPUT);
         consoleShouldReceive("Invalid email address: noatsign\n");
