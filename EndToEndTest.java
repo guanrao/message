@@ -54,6 +54,7 @@ public class EndToEndTest {
 //    @Ignore
     @Test public void showAnErrorAndDoNotSendIfTheBodyIsInvalid_story3() {
         Main.main("dinah@example.com", "");
+//        Main.main("dinah@example.com", "qwert");
         networkShouldReceive(NO_OUTPUT);
         consoleShouldReceive("Cannot send an email with no body.\n");
     }
