@@ -17,12 +17,12 @@ public class Main {
     public static void main(String... args) {
         StringBuilder sb = new StringBuilder();
         try{
-            if(!validEmail(args[0])){
-                //Invalid email address: jowithnoatsign
-                sb.append("Invalid email address: ").append(args[0]).append("\n");
-                console.write(sb.toString());
-                return;
-            }
+//            if(!validEmail(args[0])){
+//                //Invalid email address: jowithnoatsign
+//                sb.append("Invalid email address: ").append(args[0]).append("\n");
+//                console.write(sb.toString());
+//                return;
+//            }
             if(args.length < 2 || args[1].isEmpty()){
                 sb.append("Cannot send an email with no body.\n");
                 console.write(sb.toString());
@@ -31,6 +31,25 @@ public class Main {
             //for story 4, the example given does not quite agree with the description, i.e., comma-separated one arguments vs. space-separated several arguments
             //here we stick with comma-separated.
             String[] emails = args[0].split(",");
+
+            StringBuilder sbInvalidEmail = new StringBuilder();
+            for(int i = 0; i < emails.length; i++){
+                if(!validEmail(emails[i])){
+                    sbInvalidEmail.append(" ").append(emails[i]).append(",");
+                }
+            }
+
+            if(sbInvalidEmail.length() > 0){
+                sbInvalidEmail.deleteCharAt(sbInvalidEmail.length() - 1);
+                if(sbInvalidEmail.indexOf(",") == -1){
+                    sb.append("Invalid email address:");
+                }else{
+                    sb.append("Invalid email addresses:");
+                }
+                sb.append(sbInvalidEmail).append("\n");
+                console.write(sb.toString());
+                return;
+            }
 
             sb.append("connect smtp\n");
             for(int i = 0; i < emails.length; i++){
