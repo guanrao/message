@@ -17,6 +17,12 @@ public class Main {
     public static void main(String... args) {
         StringBuilder sb = new StringBuilder();
         try{
+            if(!validEmail(args[0])){
+                //Invalid email address: jowithnoatsign
+                sb.append("Invalid email address: ").append(args[0]).append("\n");
+                console.write(sb.toString());
+                return;
+            }
             sb.append("connect smtp\nTo: ").append(args[0]).append("\n\n").append(args[1]).append("\n\n").append("disconnect\n");
 
             network.write(sb.toString());
@@ -25,4 +31,12 @@ public class Main {
         }
 
     }
+
+    public static boolean validEmail(String email){
+        if(email == null || email.length() < 3 || !email.contains("@")){
+            return false;
+        }
+        return true;
+    }
+
 }
