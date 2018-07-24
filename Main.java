@@ -74,7 +74,16 @@ public class Main {
             }
             network.write(sb.toString());
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            try{
+                console.write("Connection error. Please try again.\n");
+            }catch(IOException ioe2){
+                ioe2.printStackTrace();
+            }finally {
+                //
+            }
+
+        }finally {
+            //
         }
 
     }
